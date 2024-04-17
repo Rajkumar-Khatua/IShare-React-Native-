@@ -1,11 +1,16 @@
-import { Link, router } from "expo-router";
+import { Link, Redirect, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Image, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../constants";
 import CustomButton from "../components/CustomButton";
+import { useGlobalContext } from "../context/GlobalProvider";
 
 export default function App() {
+  const { loading, isLogged } = useGlobalContext();
+
+  if (!loading && isLogged) return <Redirect href="/home" />;
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <ScrollView contentContainerStyle={{ height: "100%" }}>
@@ -23,7 +28,7 @@ export default function App() {
           <View className="relative mt-5">
             <Text className="text-2xl text-white text-center font-bold">
               Discover the greatest stories ever told in a new way with{" "}
-              <Text className="text-secondary-200">Aura</Text>
+              <Text className="text-secondary-200">Ishare</Text>
             </Text>
             <Image
               source={images.path}
@@ -32,7 +37,7 @@ export default function App() {
             />
           </View>
           <Text className="text-sm font-pregular text-gray-200 mt-7 text-center">
-            Aura is a platform that allows you to read and share stories in a
+            ishare is a platform that allows you to read and share stories in a
             new way. You can read stories from different genres and share your
             own stories with the world.
           </Text>
