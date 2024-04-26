@@ -59,7 +59,7 @@ You can contact me on
 [Twitter](https://twitter.com/RajkumarKh18976)
 [Linkedin](https://www.linkedin.com/in/rajkumarkhatua/)
 
-## Features are Not Implemented Yet but you can contribute to this project and make it better.
+## Features are Not Implemented Yet but we can contribute to this project and make it better.
 
 - BookMark Screen
   ![BookMark](Screenshot_1714119107.png)
