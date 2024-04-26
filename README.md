@@ -41,15 +41,7 @@ npm install
 npx expo start -c
 ```
 
-## Screenshots
 
-![Onboarding](Screenshot_1714118569.png)
-![Sign-In](Screenshot_1714118589.png)
-![Sign-Up](Screenshot_1714118593.png)
-![Home](Screenshot_1714117888.png)
-![Create](Screenshot_1714117891.png)
-![Search](Screenshot_1714119227.png)
-![Profile](Screenshot_1714117896.png)
 
 ## Want to Contribute?
 
