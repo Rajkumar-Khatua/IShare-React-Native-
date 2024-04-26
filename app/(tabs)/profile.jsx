@@ -17,6 +17,7 @@ import { useGlobalContext } from "../../context/GlobalProvider";
 import { icons, images } from "../../constants";
 import InfoBox from "../../components/infoBox";
 import { BlurView } from "expo-blur";
+import { StatusBar } from "expo-status-bar";
 const Profile = ({ initialQuery }) => {
   const { user, setUser, setIsLogged } = useGlobalContext();
   const { query } = useLocalSearchParams();
@@ -42,7 +43,7 @@ const Profile = ({ initialQuery }) => {
         ListHeaderComponent={() => (
           <ImageBackground
             source={images.profileBg}
-            className="w-full justify-center items-center mb-12 "
+            className="w-full justify-center items-center mb-12"
           >
             <TouchableOpacity
               className="w-full items-end mb-10"
@@ -87,6 +88,7 @@ const Profile = ({ initialQuery }) => {
           );
         }}
       />
+      <StatusBar style="inverted" backgroundColor="transparent" />
     </SafeAreaView>
   );
 };
