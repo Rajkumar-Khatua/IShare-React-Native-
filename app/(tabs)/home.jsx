@@ -6,7 +6,7 @@ import {
   RefreshControl,
   Alert,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { images } from "../../constants";
 import SearchInput from "../../components/SearchInput";
@@ -20,11 +20,39 @@ import {
 import useAppWrite from "../../lib/useAppwrite";
 import VideoCard from "../../components/VideoCard";
 import { StatusBar } from "expo-status-bar";
+import { useGlobalContext } from "../../context/GlobalProvider";
+import { useFocusEffect } from "expo-router";
 const Home = () => {
   const { data: posts, isLoading, refetch } = useAppWrite(getAllPosts);
   const { data: LatestPosts } = useAppWrite(getLatestPosts);
 
+  const { user } = useGlobalContext();
+
   const [refreshing, setRefreshing] = useState(false);
+  const [greeting, setGreeting] = useState("");
+
+  const updateGreeting = () => {
+    const currentTime = new Date().getHours();
+    let newGreeting;
+
+    if (currentTime < 12) {
+      newGreeting = "Morning";
+    } else if (currentTime < 18) {
+      newGreeting = "Afternoon";
+    } else {
+      newGreeting = "Evening";
+    }
+
+    setGreeting(`Have a great ${newGreeting}!`);
+  };
+  // Update greeting message on component mount and unmount when the screen is focused
+  useFocusEffect(
+    useCallback(() => {
+      updateGreeting();
+      return () => {};
+    }, [])
+  );
+
   const onRefresh = async () => {
     setRefreshing(true);
     await refetch();
@@ -34,7 +62,7 @@ const Home = () => {
   };
 
   // console.log(posts, isLoading, refetch);
-  // console.log("Latest", LatestPosts);
+  console.log("Latest", LatestPosts);
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -46,11 +74,11 @@ const Home = () => {
           <View className="my-6 px-4 space-y-6">
             <View className="justify-between items-start flex-row mb-6">
               <View>
-                <Text className="font-pmedium text-sm text-gray-100">
-                  Welcome
+                <Text className="font-pmedium text-lg text-gray-100">
+                  {greeting} {"\u{1F44B}"}
                 </Text>
                 <Text className="text-2xl font-psemibold text-white">
-                  {getCurrentUser?.username ?? "User"}
+                  {user?.username ?? "Guest"}
                 </Text>
               </View>
               <View className="mt-1.5">
@@ -87,7 +115,7 @@ const Home = () => {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
       />
-      <StatusBar style="inverted" animated/>
+      <StatusBar style="inverted" animated />
     </SafeAreaView>
   );
 };

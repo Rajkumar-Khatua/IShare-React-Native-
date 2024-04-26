@@ -28,7 +28,7 @@ const SignIn = () => {
       const result = await getCurrentUser();
       setUser(result);
       setIsLogged(true);
-      Alert.alert("Wow, You're now logged In");
+      // Alert.alert("Wow, You're now logged In");
       router.replace("/home");
     } catch (error) {
       console.log(error);

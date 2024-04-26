@@ -8,6 +8,8 @@ const VideoCard = ({
     title,
     thumbnail,
     video,
+    prompt,
+    createdAt,
     creator: { username, avatar },
   },
 }) => {
@@ -33,7 +35,7 @@ const VideoCard = ({
             </Text>
             <Text>
               <Text className="font-pregular text-xs text-gray-100">
-                {username}
+                {username} {"\u{2022}"} {video.$createdAt}
               </Text>
             </Text>
           </View>
